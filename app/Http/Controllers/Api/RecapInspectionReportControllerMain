@@ -1,0 +1,103 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Coa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class CoaController extends Controller
+{
+    public function index()
+    {
+        $coas = Coa::all();
+        return response()->json($coas);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'coa_number' => 'required|string|unique:coas,coa_number',
+            'product_id' => 'required|exists:products,id',
+            'product_name' => 'required|string|max:255',
+            'colour' => 'required|string|max:100',
+            'material' => 'required|string|max:100',
+            'date' => 'required|date',
+            'customer' => 'required|string|max:255',
+            'do_number' => 'required|string|max:100',
+            'production_batch_number' => 'required|string|max:100',
+            'parameters' => 'required|string',
+            'standards' => 'required|string',
+            'result' => 'required|string',
+            'diagram' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $coa = Coa::create($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'COA created successfully.',
+            'coa' => $coa,
+        ], 201);
+    }
+
+    public function show($id)
+    {
+        $coa = Coa::findOrFail($id);
+        return response()->json($coa);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $coa = Coa::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'coa_number' => 'required|string|unique:coas,coa_number,' . $coa->id,
+            'product_id' => 'required|exists:products,id',
+            'product_name' => 'required|string|max:255',
+            'colour' => 'required|string|max:100',
+            'material' => 'required|string|max:100',
+            'date' => 'required|date',
+            'customer' => 'required|string|max:255',
+            'do_number' => 'required|string|max:100',
+            'production_batch_number' => 'required|string|max:100',
+            'parameters' => 'required|string',
+            'standards' => 'required|string',
+            'result' => 'required|string',
+            'diagram' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $coa->update($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'COA updated successfully.',
+            'coa' => $coa,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $coa = Coa::findOrFail($id);
+        $coa->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'COA deleted successfully.',
+        ]);
+    }
+}

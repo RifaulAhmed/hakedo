@@ -1,0 +1,41 @@
+.compact-layout {
+    display: flex;
+    align-items: flex-start;
+    height: 100vh;
+    overflow: hidden;
+    &.pos-layout {
+        .layout-header {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+.layout-sidebar {
+    width: 100%;
+    height: 100%;
+    transition: all 300ms;
+}
+.layout-sidebar-mobile {
+    width: 100%;
+    height: 100%;
+    transition: all 300ms;
+    overflow: hidden;
+}
+
+.layout-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    .layout-header {
+        padding: 20px 28px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .content-section {
+        padding: 1rem 2rem 0rem;
+    }
+}
+
+@import 'sidebar';

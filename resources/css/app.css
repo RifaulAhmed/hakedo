@@ -1,0 +1,13 @@
+/* flex items-center justify-between hover:text-blue-500 dark:hover:text-blue-500 cursor-pointer */
+/* sidebar collapse */
+.collapse-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.collapse-item {
+    overflow: hidden;
+    max-height: 0;
+    transition: all;
+    transition-duration: 300ms;
+}

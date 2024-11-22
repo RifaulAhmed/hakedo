@@ -1,0 +1,160 @@
+.sidebar-content {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    transition: all 300ms;
+    background: $gray-900;
+    padding: 16px;
+    
+    .collapse-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 8px 16px;
+        transition: all 300ms;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        color: $gray-200;
+        &:hover {
+            color: $primary-base;
+            background: $gray-800;
+        }
+        &.collapse-active {
+            color: $primary-base;
+            background: $gray-800;
+            .collapse-icon {
+                transition: all 300ms;
+                transform: rotate(90deg);
+            }
+        }
+        &.collapse-deactive {
+            .collapse-icon {
+                transition: all 300ms;
+                transform: rotate(0deg);
+            }
+        }
+        .item-name {
+            margin-top: 2px;
+            margin-left: 12px;
+            white-space: nowrap;
+        }
+    }
+    .collapse-content {
+        overflow: hidden;
+        max-height: 0;
+        transition: all;
+        transition-duration: 300ms;
+    }
+    .nav-item {
+        padding: 8px 16px;
+        transition: all 300ms;
+        border-radius: 8px;
+        margin-bottom: 8px !important;
+        display: flex;
+        align-items: center;
+        color: $gray-200;
+        height: 38px;
+        &:hover {
+            color: $primary-base;
+            background: $gray-800;
+            .prefix {
+                background: $primary-base !important;
+                outline:  2px solid rgba(78, 151, 253, 0.3) !important;
+            }
+        }
+        &.active {
+            color: $primary-base;
+            background: $gray-800;
+            .prefix {
+                background: $primary-base !important;
+                outline:  2px solid rgba(78, 151, 253, 0.3) !important;
+            }
+        }
+        &.child-nav {
+            padding: 8px 24px;
+            .prefix {
+                padding: 2px;
+                background: white;
+                margin-right: 4px;
+            }
+        }
+        .item-name {
+            margin-top: 2px;
+            margin-left: 12px;
+            white-space: nowrap;
+        }
+    }
+
+    &.compact {
+        .collapse-button {
+            padding: 8px 8px;
+            justify-content: center;
+            .item-name {
+                display: none;
+            }
+            .collapse-icon {
+                display: none;
+            }
+        }
+        .sidebar-header {
+            justify-content: center !important;
+            img {
+                margin-right: 0 !important;
+            }
+            .app-title {
+                display: none;
+            }
+            .compact-button {
+                display: none !important;
+            }
+        }
+        .nav-item {
+            padding: 8px 8px;
+            justify-content: center;
+            &.child-nav {
+                padding: 8px 24px;
+            }
+            .item-name {
+                display: none;
+            }
+        }
+    }
+    &.compact:hover {
+        .collapse-button {
+            padding: 8px 16px;
+            justify-content: space-between;
+            .item-name {
+                display: block;
+            }
+            .collapse-icon {
+                display: block;
+            }
+        }
+        .sidebar-header {
+            justify-content: space-between !important;
+            img {
+                margin-right: 8px !important;
+            }
+            .app-title {
+                display: block;
+            }
+            .compact-button {
+                display: flex !important;
+            }
+        }
+        .nav-item {
+            padding: 8px 16px;
+            justify-content: start;
+            &.child-nav {
+                padding: 8px 24px;
+            }
+            .item-name {
+                display: block;
+            }
+        }
+    }
+}
